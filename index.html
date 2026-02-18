@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>House of Chirag | Creative Agency Portfolio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+:root{
+  --gold:#C9A96E;
+  --gold2:#A07840;
+  --goldlight:#E8D5B0;
+  --dark:#04040A;
+  --dark2:#0A0A12;
+  --card:rgba(255,255,255,0.03);
+  --border:rgba(201,169,110,0.12);
+  --text:#DDDDD8;
+  --muted:#6B6B6B;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  padding:20px 6%;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(4,4,10,0.94);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.logo-text{font-family:"Cormorant Garamond",serif;font-size:1.25rem;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:0.9;white-space:nowrap;}
+.logo-img{
+  height:46px;
+  object-fit:contain;
+  filter:invert(1) brightness(0.82) sepia(0.3) saturate(1.2) hue-rotate(5deg);
+  transition:filter 0.3s;
+}
+.logo-img:hover{filter:invert(1) brightness(1) sepia(0.5) saturate(1.5) hue-rotate(5deg);}
+.nav-links{display:flex;gap:4px}
+.nav-btn{
+  background:none;border:1px solid transparent;cursor:pointer;
+  color:var(--muted);font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;
+  padding:9px 22px;border-radius:2px;transition:all 0.35s;font-family:'Montserrat',sans-serif;
+}
+.nav-btn:hover,.nav-btn.active{
+  color:var(--gold);
+  background:rgba(201,169,110,0.06);
+  border-color:rgba(201,169,110,0.18);
+}
+
+/* PAGES */
+.page{display:none;min-height:100vh}.page.active{display:block}
+
+/* VIDEO BG */
+.video-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;transition:opacity 0.5s}
+.video-bg video{width:100%;height:100%;object-fit:cover;opacity:0.12;filter:saturate(0.6) brightness(0.8)}
+.video-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(4,4,10,0.96) 0%,rgba(10,10,18,0.88) 50%,rgba(4,4,10,0.96) 100%)}
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.page-content{position:relative;z-index:2}
+
+/* DIVIDER LINE */
+.divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 36px}
+.divider-left{margin:0 0 36px}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;
+  padding:120px 6% 80px;
+}
+.hero-eyebrow{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.65rem;font-weight:600;letter-spacing:5px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:32px;
+  animation:fadeUp 1s ease both;
+}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,6.5vw,6rem);font-weight:300;line-height:1.05;
+  margin-bottom:28px;
+  animation:fadeUp 1s 0.15s ease both;
+  letter-spacing:-0.5px;
+}
+.hero h1 em{
+  font-style:italic;
+  color:var(--gold);
+}
+.hero p{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.85rem;letter-spacing:0.5px;line-height:2;
+  color:var(--muted);max-width:520px;
+  margin-bottom:56px;
+  animation:fadeUp 1s 0.3s ease both;
+  font-weight:400;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTION */
+.section{padding:90px 6%}
+.section-eyebrow{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.62rem;font-weight:600;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:400;
+  margin-bottom:18px;line-height:1.15;letter-spacing:0.3px;
+}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-subtitle{
+  font-size:0.83rem;color:var(--muted);
+  line-height:1.9;max-width:540px;margin-bottom:60px;
+  letter-spacing:0.3px;
+}
+
+/* SERVICES GRID */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1px;border:1px solid var(--border);margin-bottom:0}
+.service-card{
+  background:var(--card);
+  padding:44px 38px;
+  position:relative;overflow:hidden;
+  transition:all 0.4s cubic-bezier(0.23,1,0.32,1);
+  border:1px solid var(--border);
+  margin:-1px;
+}
+.service-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(0);transition:transform 0.4s;
+}
+.service-card:hover{background:rgba(201,169,110,0.04)}
+.service-card:hover::before{transform:scaleX(1)}
+.service-number{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.75rem;color:var(--gold);opacity:0.5;
+  letter-spacing:2px;margin-bottom:24px;display:block;
+  font-weight:500;
+}
+.service-card h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.45rem;font-weight:500;
+  margin-bottom:14px;color:#E8E8E0;letter-spacing:0.3px;
+}
+.service-card p{font-size:0.8rem;color:var(--muted);line-height:1.9;letter-spacing:0.2px}
+.service-line{
+  width:28px;height:1px;
+  background:var(--gold);opacity:0.5;
+  margin-top:28px;transition:width 0.4s,opacity 0.4s;
+}
+.service-card:hover .service-line{width:48px;opacity:1}
+
+/* AUTOMATION */
+.automation-banner{
+  margin:80px 0 0;
+  background:rgba(201,169,110,0.03);
+  border:1px solid var(--border);
+  padding:56px 56px;
+  position:relative;overflow:hidden;
+}
+.automation-banner::after{
+  content:'';position:absolute;top:-1px;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent 10%,var(--gold) 50%,transparent 90%);
+}
+.automation-banner h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.9rem;font-weight:400;margin-bottom:14px;
+  letter-spacing:0.3px;
+}
+.automation-banner h3 em{font-style:italic;color:var(--gold)}
+.automation-banner > p{color:var(--muted);font-size:0.82rem;line-height:1.9;max-width:600px;letter-spacing:0.2px}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.tag{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.65rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  border:1px solid rgba(201,169,110,0.2);
+  padding:7px 18px;color:rgba(201,169,110,0.7);
+  transition:all 0.3s;
+}
+.tag:hover{background:rgba(201,169,110,0.07);border-color:var(--gold);color:var(--gold)}
+
+/* CTA BUTTON */
+.cta-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:transparent;
+  border:1px solid var(--gold);
+  color:var(--gold);font-weight:600;
+  font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;
+  padding:16px 40px;
+  text-decoration:none;cursor:pointer;font-family:'Montserrat',sans-serif;
+  transition:all 0.35s;white-space:nowrap;
+  position:relative;overflow:hidden;
+}
+.cta-btn::before{
+  content:'';position:absolute;inset:0;
+  background:var(--gold);
+  transform:translateX(-101%);transition:transform 0.35s cubic-bezier(0.23,1,0.32,1);
+  z-index:0;
+}
+.cta-btn:hover::before{transform:translateX(0)}
+.cta-btn:hover{color:#000}
+.cta-btn span,.cta-btn svg{position:relative;z-index:1}
+.cta-btn-solid{
+  background:var(--gold);color:#000;border-color:var(--gold);
+}
+.cta-btn-solid::before{background:#000}
+.cta-btn-solid:hover{color:var(--gold)}
+
+/* CTA SECTION */
+.cta-section{padding:90px 6%;text-align:center}
+.cta-box{
+  background:rgba(201,169,110,0.03);
+  border:1px solid var(--border);
+  padding:80px 60px;
+  position:relative;overflow:hidden;
+}
+.cta-box::before,.cta-box::after{
+  content:'';position:absolute;
+  background:radial-gradient(circle,rgba(201,169,110,0.06),transparent 70%);
+  border-radius:50%;
+}
+.cta-box::before{width:500px;height:500px;top:-250px;left:-150px}
+.cta-box::after{width:400px;height:400px;bottom:-200px;right:-100px}
+.cta-box h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:400;
+  margin-bottom:18px;position:relative;z-index:1;letter-spacing:0.3px;
+}
+.cta-box h2 em{font-style:italic;color:var(--gold)}
+.cta-box p{
+  color:var(--muted);margin-bottom:44px;
+  font-size:0.82rem;position:relative;z-index:1;
+  line-height:1.9;letter-spacing:0.3px;max-width:480px;margin-left:auto;margin-right:auto;
+}
+.cta-box p{margin-bottom:44px}
+
+/* PAGE 2 */
+#page2 .page-content{padding:120px 6% 90px}
+.websites-hero{text-align:center;margin-bottom:80px}
+
+.website-card{
+  background:var(--card);border:1px solid var(--border);
+  margin-bottom:40px;overflow:hidden;
+  transition:all 0.4s cubic-bezier(0.23,1,0.32,1);
+  position:relative;
+}
+.website-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(0);transition:transform 0.5s;
+}
+.website-card:hover::before{transform:scaleX(1)}
+.website-card:hover{border-color:rgba(201,169,110,0.3);box-shadow:0 40px 80px rgba(0,0,0,0.5)}
+.wci{display:grid;grid-template-columns:1fr 1fr;min-height:360px}
+.wcimg{position:relative;overflow:hidden;background:linear-gradient(135deg,#060609,#0e0e16)}
+.mock-browser{
+  position:absolute;inset:24px;background:#0c0c16;
+  border:1px solid rgba(201,169,110,0.12);
+  box-shadow:0 24px 60px rgba(0,0,0,0.7);
+}
+.bbar{
+  background:#0a0a14;padding:12px 18px;
+  display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.bdots{display:flex;gap:6px}
+.bdots span{width:9px;height:9px;border-radius:50%}
+.bdots span:nth-child(1){background:#3a1a1a}
+.bdots span:nth-child(2){background:#3a3a1a}
+.bdots span:nth-child(3){background:#1a3a1a}
+.burl{
+  flex:1;background:rgba(255,255,255,0.03);
+  padding:5px 12px;font-size:0.68rem;color:rgba(201,169,110,0.3);
+  font-family:'Montserrat',sans-serif;letter-spacing:0.5px;margin-left:12px;
+}
+.bcontent{
+  height:calc(100% - 42px);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  padding:28px;
+}
+.sn{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:#E8E8E0;margin-bottom:8px;letter-spacing:1px}
+.ss{font-size:0.65rem;color:var(--muted);letter-spacing:3px;text-transform:uppercase;font-weight:500}
+.wcinfo{padding:50px 48px;display:flex;flex-direction:column;justify-content:center}
+.type-tag{
+  font-family:'Montserrat',sans-serif;
+  font-size:0.6rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(201,169,110,0.2);
+  padding:5px 14px;margin-bottom:22px;width:fit-content;
+}
+.wcinfo h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:400;margin-bottom:18px;letter-spacing:0.3px;
+}
+.wcinfo h2 a{
+  text-decoration:none;color:#E8E8E0;
+  border-bottom:1px solid rgba(201,169,110,0.2);
+  transition:all 0.3s;padding-bottom:2px;
+}
+.wcinfo h2 a:hover{color:var(--gold);border-color:var(--gold)}
+.wcinfo p{color:var(--muted);font-size:0.8rem;line-height:1.9;margin-bottom:18px;letter-spacing:0.2px}
+.fl{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.chip{
+  font-size:0.6rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,0.07);
+  padding:5px 14px;color:rgba(255,255,255,0.3);
+}
+.visit-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:transparent;border:1px solid rgba(201,169,110,0.25);
+  color:rgba(201,169,110,0.7);font-weight:600;font-size:0.62rem;
+  letter-spacing:2.5px;text-transform:uppercase;
+  padding:11px 26px;text-decoration:none;transition:all 0.3s;width:fit-content;
+  font-family:'Montserrat',sans-serif;
+}
+.visit-btn:hover{background:rgba(201,169,110,0.07);border-color:var(--gold);color:var(--gold)}
+
+/* PAGE 3 */
+#page3 .page-content{padding:120px 6% 90px}
+.content-hero{text-align:center;margin-bottom:80px}
+.niche-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;margin-bottom:80px}
+.niche-card{
+  background:var(--card);border:1px solid var(--border);
+  padding:40px 30px;text-align:center;
+  transition:all 0.4s;position:relative;overflow:hidden;margin:-1px;
+}
+.niche-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform 0.4s}
+.niche-card:hover{background:rgba(201,169,110,0.04);border-color:rgba(201,169,110,0.25)}
+.niche-card:hover::before{transform:scaleX(1)}
+.niche-card h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;font-weight:500;margin-bottom:12px;color:#E8E8E0;letter-spacing:0.5px;
+}
+.niche-card p{font-size:0.78rem;color:var(--muted);line-height:1.85;letter-spacing:0.2px}
+.niche-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.72rem;color:var(--gold);opacity:0.4;
+  letter-spacing:2px;margin-bottom:20px;display:block;font-weight:500;
+}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin:0 0 80px;border:1px solid var(--border)}
+.stat-card{
+  background:var(--card);border:1px solid var(--border);
+  padding:48px 30px;text-align:center;margin:-1px;
+  transition:background 0.3s;
+}
+.stat-card:hover{background:rgba(201,169,110,0.04)}
+.stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3.5rem;font-weight:300;
+  color:var(--gold);letter-spacing:-1px;display:block;margin-bottom:8px;
+}
+.stat-card p{font-size:0.65rem;color:var(--muted);letter-spacing:3px;text-transform:uppercase;font-weight:600}
+.content-cta{
+  background:rgba(201,169,110,0.03);border:1px solid var(--border);
+  padding:80px 60px;text-align:center;position:relative;overflow:hidden;margin-bottom:0;
+}
+.content-cta::before,.content-cta::after{content:'';position:absolute;background:radial-gradient(circle,rgba(201,169,110,0.05),transparent 70%);border-radius:50%}
+.content-cta::before{width:500px;height:500px;top:-200px;right:-100px}
+.content-cta::after{width:400px;height:400px;bottom:-200px;left:-100px}
+.content-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:400;margin-bottom:16px;position:relative;z-index:1;letter-spacing:0.3px}
+.content-cta h2 em{font-style:italic;color:var(--gold)}
+.content-cta > p{color:var(--muted);font-size:0.82rem;max-width:460px;margin:0 auto 44px;position:relative;z-index:1;line-height:1.9;letter-spacing:0.3px}
+.showcase-scroll{display:flex;gap:1px;overflow-x:auto;padding-bottom:0;scrollbar-width:thin;scrollbar-color:rgba(201,169,110,0.2) transparent;margin-bottom:80px;border:1px solid var(--border)}
+.showcase-item{flex:0 0 280px;background:var(--card);border-right:1px solid var(--border);transition:all 0.3s}
+.showcase-item:hover{background:rgba(201,169,110,0.04)}
+.showcase-thumb{height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.thumb-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;font-weight:400;color:rgba(201,169,110,0.6);letter-spacing:2px;
+}
+.sii{padding:20px 24px;border-top:1px solid var(--border)}
+.sii h4{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:500;margin-bottom:6px;color:#E8E8E0;letter-spacing:0.5px}
+.sii p{font-size:0.68rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;font-weight:500}
+.g1{background:linear-gradient(135deg,#08080f,#101018)}
+.g2{background:linear-gradient(135deg,#070b0d,#0c1215)}
+.g3{background:linear-gradient(135deg,#0d0608,#140a10)}
+.g4{background:linear-gradient(135deg,#0d0a06,#141008)}
+.g5{background:linear-gradient(135deg,#060d08,#0a1408)}
+.g6{background:linear-gradient(135deg,#08080c,#10101a)}
+
+footer{
+  background:rgba(4,4,10,0.8);border-top:1px solid var(--border);
+  padding:34px 6%;display:flex;justify-content:space-between;align-items:center;
+  position:relative;z-index:2;flex-wrap:wrap;gap:20px;
+}
+footer p{color:var(--muted);font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;font-weight:500}
+
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(201,169,110,0.2)}
+
+@media(max-width:900px){
+  .wci{grid-template-columns:1fr}
+  .wcimg{min-height:220px}
+  .wcinfo{padding:36px 28px}
+}
+@media(max-width:768px){
+  .stats-row{grid-template-columns:1fr}
+  nav{padding:16px 4%}
+  .nav-btn{font-size:0.62rem;padding:8px 14px;letter-spacing:2px}
+  .section{padding:70px 4%}
+  #page2 .page-content,#page3 .page-content{padding:100px 4% 70px}
+  .automation-banner{padding:40px 32px}
+  .cta-box,.content-cta{padding:56px 32px}
+}
+</style>
+</head>
+<body>
+
+<div class="video-bg" id="videoBg">
+  <video autoplay muted loop playsinline id="bgVideo">
+    <source src="https://cdn.coverr.co/videos/coverr-glitchy-red-and-blue-patterns/1080p.mp4" type="video/mp4">
+    <source src="https://cdn.coverr.co/videos/coverr-abstract-liquid-dark/1080p.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
+</div>
+<canvas id="particles"></canvas>
+
+<nav>
+  <div class="logo-text">House of Chirag</div>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="showPage(1)">Services</button>
+    <button class="nav-btn" onclick="showPage(2)">Websites</button>
+    <button class="nav-btn" onclick="showPage(3)">Content</button>
+  </div>
+</nav>
+
+<!-- ═══ PAGE 1: SERVICES ═══ -->
+<div id="page1" class="page active">
+  <div class="page-content">
+    <section class="hero">
+      <div class="hero-eyebrow">Full Service Creative Agency</div>
+      <div class="divider"></div>
+      <h1>We Build Brands That<br><em>Dominate Online</em></h1>
+      <p>From cinematic video production to performance marketing and bespoke automations — we deliver everything your brand needs to grow, convert, and scale with intention.</p>
+      <a href="https://wa.me/919902532710?text=Hello!%20I%20want%20to%20know%20more%20about%20your%20services." class="cta-btn cta-btn-solid" target="_blank">
+        <span>Begin the Conversation</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+      </a>
+    </section>
+
+    <section class="section">
+      <div class="section-eyebrow">Our Expertise</div>
+      <div class="divider-left divider"></div>
+      <div class="section-title">Services Built for <em>Measurable Growth</em></div>
+      <div class="section-subtitle">Every service we offer is engineered around one objective — building brands that command attention and convert audiences into lasting customers.</div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-number">01</span>
+          <h3>Video Editing</h3>
+          <p>Cinematic cuts, motion graphics, colour grading, and visual effects that transform raw footage into content that captivates and drives results across every platform.</p>
+          <div class="service-line"></div>
+        </div>
+        <div class="service-card">
+          <span class="service-number">02</span>
+          <h3>Video Shoot</h3>
+          <p>Professional on-location shoots with high-end equipment — brand films, product videos, reels, and corporate content produced with precision and creative vision.</p>
+          <div class="service-line"></div>
+        </div>
+        <div class="service-card">
+          <span class="service-number">03</span>
+          <h3>SEO Optimised Website</h3>
+          <p>Custom-built websites engineered for speed, design excellence, and search engine authority — converting organic visitors into loyal, paying customers around the clock.</p>
+          <div class="service-line"></div>
+        </div>
+        <div class="service-card">
+          <span class="service-number">04</span>
+          <h3>Google Ads</h3>
+          <p>Data-driven Google campaigns targeting the right audience at the precise right moment — maximising return on every rupee you invest in paid search.</p>
+          <div class="service-line"></div>
+        </div>
+        <div class="service-card">
+          <span class="service-number">05</span>
+          <h3>Meta Ads</h3>
+          <p>High-impact creative paired with precision audience targeting on Facebook and Instagram — engineered to generate qualified leads and accelerate revenue growth.</p>
+          <div class="service-line"></div>
+        </div>
+        <div class="service-card">
+          <span class="service-number">06</span>
+          <h3>Social Media Management</h3>
+          <p>Full-spectrum social strategy — content calendar, creative production, scheduling, community engagement, and monthly analytics reports managed entirely for you.</p>
+          <div class="service-line"></div>
+        </div>
+      </div>
+
+      <div class="automation-banner">
+        <div class="section-eyebrow">Custom Automations</div>
+        <h3>Built to Your Exact <em>Business Requirements</em></h3>
+        <p>We do not believe in one-size-fits-all solutions. Every automation is custom-engineered to your specific workflow — eliminating manual effort, saving critical time, and scaling the processes that drive your business forward.</p>
+        <div class="tags">
+          <span class="tag">CRM Integration</span>
+          <span class="tag">Lead Auto-Response</span>
+          <span class="tag">WhatsApp Bots</span>
+          <span class="tag">Report Generation</span>
+          <span class="tag">Booking Systems</span>
+          <span class="tag">Follow-up Sequences</span>
+          <span class="tag">Inventory Alerts</span>
+          <span class="tag">Custom Workflows</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="cta-box">
+        <div class="section-eyebrow">Get in Touch</div>
+        <div class="divider"></div>
+        <h2>Ready to <em>Elevate</em> Your Brand?</h2>
+        <p>Let us discuss your goals and build something extraordinary together. One conversation is all it takes to begin.</p>
+        <a href="https://wa.me/919902532710?text=Hello!%20I%20want%20to%20know%20more%20about%20your%20services." class="cta-btn" target="_blank">
+          <span>Contact Us on WhatsApp</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="logo-text" style="font-size:0.9rem">House of Chirag</div>
+      <p>All Rights Reserved &nbsp;|&nbsp; House of Chirag &nbsp;|&nbsp; 2025</p>
+    </footer>
+  </div>
+</div>
+
+<!-- ═══ PAGE 2: WEBSITES ═══ -->
+<div id="page2" class="page">
+  <div class="page-content">
+    <div class="websites-hero">
+      <div class="section-eyebrow" style="text-align:center">Selected Work</div>
+      <div class="divider"></div>
+      <div class="section-title" style="text-align:center;margin-bottom:14px">Websites We Have <em>Built and Launched</em></div>
+      <p style="color:var(--muted);max-width:500px;margin:0 auto;font-size:0.82rem;line-height:1.9;letter-spacing:0.3px">Real businesses. Real results. Every website is designed to perform with distinction — visually authoritative and conversion-optimised from the first visit.</p>
+    </div>
+
+    <!-- WAGS AND WONDERS -->
+    <div class="website-card">
+      <div class="wci">
+        <div class="wcimg">
+          <div class="mock-browser">
+            <div class="bbar"><div class="bdots"><span></span><span></span><span></span></div><div class="burl">wagsandwonders.com</div></div>
+            <div class="bcontent" style="background:linear-gradient(145deg,#08101c,#0a1520)">
+              <div class="sn">Wags &amp; Wonders</div>
+              <div class="divider" style="margin:14px auto 14px;width:40px"></div>
+              <div class="ss">Premium Pet Boarding Centre</div>
+            </div>
+          </div>
+        </div>
+        <div class="wcinfo">
+          <div class="type-tag">Pet Boarding</div>
+          <h2><a href="https://wagsandwonders.com" target="_blank">Wags and Wonders &rarr;</a></h2>
+          <p>Wags and Wonders is a premium pet boarding centre designed to feel like a genuine home away from home for beloved companions. The website reflects the warmth, safety, and professional care the centre provides — featuring detailed service listings, a gallery of happy boarders, online enquiry forms, and seamless location integration.</p>
+          <p>The site is built around local pet owners searching for trustworthy boarding, grooming, and day-care services, with fully SEO-optimised pages for maximum search visibility and direct bookings.</p>
+          <div class="fl">
+            <span class="chip">Pet Boarding</span><span class="chip">Day Care</span><span class="chip">Grooming</span><span class="chip">Online Enquiry</span><span class="chip">SEO Optimised</span>
+          </div>
+          <a href="https://wagsandwonders.com" target="_blank" class="visit-btn">Visit Website &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAKHII IVF -->
+    <div class="website-card">
+      <div class="wci">
+        <div class="wcimg">
+          <div class="mock-browser">
+            <div class="bbar"><div class="bdots"><span></span><span></span><span></span></div><div class="burl">sakhiifertility.in</div></div>
+            <div class="bcontent" style="background:linear-gradient(145deg,#100810,#160d18)">
+              <div class="sn">Sakhii Fertility</div>
+              <div class="divider" style="margin:14px auto 14px;width:40px"></div>
+              <div class="ss">Advanced IVF Centre</div>
+            </div>
+          </div>
+        </div>
+        <div class="wcinfo">
+          <div class="type-tag">IVF Centre</div>
+          <h2><a href="https://sakhiifertility.in" target="_blank">Sakhii Fertility &rarr;</a></h2>
+          <p>Sakhii IVF is a state-of-the-art fertility centre dedicated to helping couples achieve their dream of parenthood. The website is designed to build deep trust and clinical credibility — featuring comprehensive treatment information on IVF, IUI, and egg freezing, specialist profiles, patient success stories, and a secure appointment booking system.</p>
+          <p>Given the sensitive nature of the service, the design communicates compassion and excellence simultaneously — guiding patients to take the next step with complete confidence.</p>
+          <div class="fl">
+            <span class="chip">IVF Treatment</span><span class="chip">IUI</span><span class="chip">Egg Freezing</span><span class="chip">Doctor Profiles</span><span class="chip">Appointment Booking</span>
+          </div>
+          <a href="https://sakhiifertility.in" target="_blank" class="visit-btn">Visit Website &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PETROPAWLIS -->
+    <div class="website-card">
+      <div class="wci">
+        <div class="wcimg">
+          <div class="mock-browser">
+            <div class="bbar"><div class="bdots"><span></span><span></span><span></span></div><div class="burl">petropawlis.in</div></div>
+            <div class="bcontent" style="background:linear-gradient(145deg,#050d08,#08140a)">
+              <div class="sn">Petropawlis</div>
+              <div class="divider" style="margin:14px auto 14px;width:40px"></div>
+              <div class="ss">Luxury Pet Resort &amp; Spa</div>
+            </div>
+          </div>
+        </div>
+        <div class="wcinfo">
+          <div class="type-tag">Pet Resort</div>
+          <h2><a href="https://petropawlis.in" target="_blank">Petropawlis &rarr;</a></h2>
+          <p>Petropawlis is a luxury pet boarding resort offering five-star experiences for dogs and cats. The website elevates the brand above conventional pet boarding — showcasing premium suites, outdoor play areas, in-house veterinary care, and a dedicated spa and grooming menu with a rich photo gallery and video tour.</p>
+          <p>The site features seamless online booking, transparent service packages, and an integrated WhatsApp contact system — making it effortless for pet parents to enquire and convert into confirmed guests.</p>
+          <div class="fl">
+            <span class="chip">Luxury Boarding</span><span class="chip">Pet Spa</span><span class="chip">Vet On-Site</span><span class="chip">Online Booking</span><span class="chip">WhatsApp CTA</span>
+          </div>
+          <a href="https://petropawlis.in" target="_blank" class="visit-btn">Visit Website &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <footer style="margin-top:0">
+      <div class="logo-text" style="font-size:0.9rem">House of Chirag</div>
+      <a href="https://wa.me/919902532710?text=Hello!%20I'd%20like%20a%20website%20built%20for%20my%20business." class="cta-btn" target="_blank" style="font-size:0.62rem;padding:12px 28px"><span>Build My Website</span></a>
+    </footer>
+  </div>
+</div>
+
+<!-- ═══ PAGE 3: CONTENT CREATION ═══ -->
+<div id="page3" class="page">
+  <div class="page-content">
+    <div class="content-hero">
+      <div class="section-eyebrow" style="text-align:center">Content Creation</div>
+      <div class="divider"></div>
+      <div class="section-title" style="text-align:center;margin-bottom:14px">We Have Covered <em>Every Industry</em></div>
+      <p style="color:var(--muted);max-width:500px;margin:0 auto;font-size:0.82rem;line-height:1.9;letter-spacing:0.3px">From intimate cafes to industrial machinery — our lens and edit suite have told it all. Every frame is crafted to communicate your brand's story with authority and artistry.</p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card"><span class="stat-num">50+</span><p>Brands Worked With</p></div>
+      <div class="stat-card"><span class="stat-num">8+</span><p>Industries Covered</p></div>
+      <div class="stat-card"><span class="stat-num">500+</span><p>Videos Produced</p></div>
+    </div>
+
+    <div class="section-eyebrow">Industries We Serve</div>
+    <div class="divider-left divider"></div>
+    <div class="section-title" style="margin-bottom:12px">Niches We Have <em>Mastered</em></div>
+    <div class="section-subtitle">Each industry demands a unique visual language. We understand the nuance of every niche we enter — and produce content that resonates deeply with the right audience.</div>
+
+    <div class="niche-grid">
+      <div class="niche-card"><span class="niche-num">01</span><h3>Cafes &amp; Restaurants</h3><p>Cinematic food reels, ambience films, and social content that fills reservations and cultivates loyal communities.</p></div>
+      <div class="niche-card"><span class="niche-num">02</span><h3>Spas &amp; Wellness</h3><p>Serene, high-quality content communicating luxury and rejuvenation, crafted to attract discerning clientele.</p></div>
+      <div class="niche-card"><span class="niche-num">03</span><h3>Pet Resorts</h3><p>Heartfelt facility tours, care demonstration videos, and social assets that build immediate trust with pet owners.</p></div>
+      <div class="niche-card"><span class="niche-num">04</span><h3>IVF &amp; Hospitals</h3><p>Compassionate, professional content that connects emotionally while establishing the credibility patients need.</p></div>
+      <div class="niche-card"><span class="niche-num">05</span><h3>Heavy Machinery</h3><p>Dynamic industrial films showcasing engineering power, precision, and scale to B2B decision-makers.</p></div>
+      <div class="niche-card"><span class="niche-num">06</span><h3>Retail &amp; E-Commerce</h3><p>Product films, ad creatives, and unboxing content designed to drive conversion and repeat purchase behaviour.</p></div>
+      <div class="niche-card"><span class="niche-num">07</span><h3>Fitness &amp; Gyms</h3><p>High-energy transformation stories and facility showcases that inspire viewers to take immediate action.</p></div>
+      <div class="niche-card"><span class="niche-num">08</span><h3>Real Estate</h3><p>Cinematic property walkthroughs and aerial footage that elevate listings and accelerate sales timelines.</p></div>
+    </div>
+
+    <div class="section-eyebrow">Selected Work</div>
+    <div class="divider-left divider"></div>
+    <div class="section-title" style="margin-bottom:32px">A Glimpse Into Our <em>Portfolio</em></div>
+
+    <div class="showcase-scroll">
+      <div class="showcase-item"><div class="showcase-thumb g1"><span class="thumb-label">Cafe Reel</span></div><div class="sii"><h4>Cafe Brand Film</h4><p>Social Media &middot; 30 sec</p></div></div>
+      <div class="showcase-item"><div class="showcase-thumb g2"><span class="thumb-label">Pet Resort</span></div><div class="sii"><h4>Pet Resort Tour</h4><p>Brand Video &middot; 90 sec</p></div></div>
+      <div class="showcase-item"><div class="showcase-thumb g3"><span class="thumb-label">IVF Centre</span></div><div class="sii"><h4>Fertility Centre Film</h4><p>Corporate &middot; 2 min</p></div></div>
+      <div class="showcase-item"><div class="showcase-thumb g4"><span class="thumb-label">Machinery</span></div><div class="sii"><h4>Industrial Showcase</h4><p>Industrial &middot; 60 sec</p></div></div>
+      <div class="showcase-item"><div class="showcase-thumb g5"><span class="thumb-label">Wellness Spa</span></div><div class="sii"><h4>Spa Experience Film</h4><p>Lifestyle &middot; 45 sec</p></div></div>
+      <div class="showcase-item"><div class="showcase-thumb g6"><span class="thumb-label">Restaurant</span></div><div class="sii"><h4>Restaurant Promo</h4><p>Social Ad &middot; 15 sec</p></div></div>
+    </div>
+
+    <div class="content-cta">
+      <div class="section-eyebrow">View the Full Portfolio</div>
+      <div class="divider"></div>
+      <h2>Explore Our <em>Complete Work</em></h2>
+      <p>Browse our full library of films, reels, and content across every niche — and discover what is possible for your brand.</p>
+      <a href="https://drive.google.com/drive/folders/1LD_HidWBLHb1cYyqVgskkzCun4F2HphY?usp=sharing" target="_blank" class="cta-btn cta-btn-solid" style="margin:0 auto;display:inline-flex">
+        <span>Know More</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+      </a>
+    </div>
+
+    <footer>
+      <div class="logo-text" style="font-size:0.9rem">House of Chirag</div>
+      <a href="https://wa.me/919902532710?text=Hello!%20I'm%20interested%20in%20content%20creation%20services." class="cta-btn" target="_blank" style="font-size:0.62rem;padding:12px 28px"><span>Begin a Project</span></a>
+    </footer>
+  </div>
+</div>
+
+<script>
+function showPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page'+n).classList.add('active');
+  document.querySelectorAll('.nav-btn')[n-1].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  const vbg=document.getElementById('videoBg'),pc=document.getElementById('particles');
+  vbg.style.opacity=n===1?'1':'0';
+  pc.style.opacity=n===1?'1':'0';
+  setTimeout(observeCards,80);
+}
+
+// PARTICLES — refined gold tones
+const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
+let W,H,pts=[];
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
+resize();addEventListener('resize',resize);
+for(let i=0;i<80;i++)pts.push({
+  x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+  vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
+  r:Math.random()*.8+.2,a:Math.random()*.25+.05,
+  gold:Math.random()>.5
+});
+let mx=-9999,my=-9999;
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p=>{
+    const dx=p.x-mx,dy=p.y-my,d=Math.hypot(dx,dy);
+    if(d<150){p.x+=dx/d*1.2;p.y+=dy/d*1.2;}
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=p.gold?`rgba(201,169,110,${p.a})`:`rgba(180,170,140,${p.a*.5})`;
+    ctx.fill();
+  });
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+    const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);
+    if(d<120){
+      ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);
+      ctx.strokeStyle=`rgba(201,169,110,${(1-d/120)*.04})`;ctx.lineWidth=.4;ctx.stroke();
+    }
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+
+// SCROLL REVEAL
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});
+},{threshold:.06});
+function observeCards(){
+  document.querySelectorAll('.service-card,.website-card,.niche-card,.stat-card,.showcase-item').forEach(el=>{
+    el.style.opacity='0';el.style.transform='translateY(24px)';
+    el.style.transition='opacity .7s ease,transform .7s ease,background .3s,border-color .3s,box-shadow .3s';
+    observer.observe(el);
+  });
+}
+observeCards();
+
+// VIDEO FALLBACK
+document.getElementById('bgVideo').onerror=()=>{
+  document.getElementById('videoBg').style.background='radial-gradient(ellipse at 30% 50%,rgba(201,169,110,0.03) 0%,transparent 50%),radial-gradient(ellipse at 70% 20%,rgba(201,169,110,0.02) 0%,transparent 50%)';
+};
+</script>
+</body>
+</html>
